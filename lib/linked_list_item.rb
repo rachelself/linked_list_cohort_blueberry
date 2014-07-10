@@ -32,7 +32,7 @@ class LinkedListItem
   end
 
   def <=>(other_item)
-    @payload <=> other_item.payload
+    @payload.to_s <=> other_item.payload.to_s
   end
 
   # def >(item)
