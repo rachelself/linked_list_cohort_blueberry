@@ -88,7 +88,7 @@ class LinkedList
     index.times do
       if current_item
         current_item = current_item.next_item
-        current_item
+        current_item.destroy
       else
         raise IndexError
       end
