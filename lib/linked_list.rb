@@ -23,20 +23,41 @@ class LinkedList
     end
   end
 
-  def get(index)
-    if index < 0
-      raise IndexError
-    end
+  # def get(index)
+  #   # return_item = false
+  #
+  #   # raise IndexError if index < 0
+  #   # current_item = @first_item
+  #   # item.times do
+  #   #   raise IndexError if current_item.nil?
+  #   #   current_item = current_item.next_item
+  #   # end
+  #   # return_item ? current_item: current_item.payload
+  #
+  #   if index < 0
+  #     raise IndexError
+  #   end
+  #
+  #   current_item = @first_item
+  #   index.times do
+  #     if current_item
+  #       current_item = current_item.next_item
+  #     else
+  #       raise IndexError
+  #     end
+  #   end
+  #   current_item.payload
+  # end
+
+  def get(index, return_item=false)
+    raise IndexError if index < 0
 
     current_item = @first_item
     index.times do
-      if current_item
-        current_item = current_item.next_item
-      else
-        raise IndexError
-      end
+      raise IndexError if current_item.nil?
+      current_item = current_item.next_item
     end
-    current_item.payload
+    return_item ? current_item : current_item.payload
   end
 
   def last
@@ -67,7 +88,6 @@ class LinkedList
 
   def []=(index, str)
     current = replace(index, str)
-    current
   end
 
   def replace(index, str)
@@ -84,15 +104,52 @@ class LinkedList
   end
 
   def delete(index)
+    raise IndexError if index > @size
+    if index == 0
+      @first_item = @first_item.next_item
+    else
+      previous_item = get(index - 1, true)
+      next_item = get(index + 1, true)
+      previous_item.next_item = next_item
+    end
+    @size -= 1
+  end
+
+  def get(index, return_item=false)
+    raise IndexError if index < 0
+
     current_item = @first_item
     index.times do
-      if current_item
-        current_item = current_item.next_item
-        current_item.destroy
-      else
-        raise IndexError
-      end
+      raise IndexError if current_item.nil?
+      current_item = current_item.next_item
     end
+    return_item ? current_item : current_item.payload
+  end
+
+
+  def index(payload)
+    index = -1
+    current_item = @first_item
+    until current_item.nil?
+      index += 1
+      return index if current_item.payload == payload
+      current_item = current_item.next_item
+    end
+    nil
+  end
+
+  def sorted?
+    current_item = @first_item
+    until current_item.nil?
+      index += 1
+      return true if current_item > current_item.next_item
+      # previous_item = get(index - 1, true)
+      # next_item = get(index + 1, true)
+      # previous_item.next_item = next_item
+
+      return true if
+    end
+    true
   end
 
   private
