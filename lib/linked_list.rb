@@ -23,32 +23,6 @@ class LinkedList
     end
   end
 
-  # def get(index)
-  #   # return_item = false
-  #
-  #   # raise IndexError if index < 0
-  #   # current_item = @first_item
-  #   # item.times do
-  #   #   raise IndexError if current_item.nil?
-  #   #   current_item = current_item.next_item
-  #   # end
-  #   # return_item ? current_item: current_item.payload
-  #
-  #   if index < 0
-  #     raise IndexError
-  #   end
-  #
-  #   current_item = @first_item
-  #   index.times do
-  #     if current_item
-  #       current_item = current_item.next_item
-  #     else
-  #       raise IndexError
-  #     end
-  #   end
-  #   current_item.payload
-  # end
-
   def get(index, return_item=false)
     raise IndexError if index < 0
 
@@ -115,18 +89,6 @@ class LinkedList
     @size -= 1
   end
 
-  def get(index, return_item=false)
-    raise IndexError if index < 0
-
-    current_item = @first_item
-    index.times do
-      raise IndexError if current_item.nil?
-      current_item = current_item.next_item
-    end
-    return_item ? current_item : current_item.payload
-  end
-
-
   def index(payload)
     index = -1
     current_item = @first_item
@@ -139,17 +101,24 @@ class LinkedList
   end
 
   def sorted?
-    current_item = @first_item
-    until current_item.nil?
-      index += 1
-      return true if current_item > current_item.next_item
-      # previous_item = get(index - 1, true)
-      # next_item = get(index + 1, true)
-      # previous_item.next_item = next_item
+    # call sort and then compare the sorted list to original list
+    # if they match then return true.
 
-      return true if
-    end
-    true
+    # current_item = @first_item
+    # until current_item.nil?
+    #   index += 1
+    #   return true if current_item > current_item.next_item
+    #   # previous_item = get(index - 1, true)
+    #   # next_item = get(index + 1, true)
+    #   # previous_item.next_item = next_item
+    #
+    #   return true if
+    # end
+    # true
+  end
+
+  def sort
+    # code to sort it, called from sorted?
   end
 
   private
