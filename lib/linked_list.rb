@@ -56,9 +56,8 @@ class LinkedList
     end
   end
 
-  def [](index)
-    get(index)
-  end
+  #bracket method means call get
+  alias [] get
 
   def []=(index, str)
     current = replace(index, str)
@@ -101,12 +100,49 @@ class LinkedList
   end
 
   def sorted?
-    # call sort and then compare the sorted list to original list
-    # if they match then return true.
+    current_item = @first_item
+    return true if current_item.nil?
+    until current_item.last?
+      return false if current_item > current_item.next_item
+      current_item = current_item.next_item
+    end
+    true
   end
 
-  def sort
-    # code to sort it, called from sorted?
+  def swap_with_next(index)
+    if index == 0
+      item = get(index, true)
+      following_item = get(index + 1, true)
+      last_item = get(index + 2, true)
+
+      @first_item = following_item
+      @first_item.next_item = item
+      item.next_item = last_item
+    else
+      previous_item = get(index-1, true)
+      item = get(index, true)
+      following_item = get(index + 1, true)
+      last_item = get(index + 2, true)
+
+      previous_item.next_item = following_item
+      following_item.next_item = item
+      item.next_item = last_item
+    end
+  end
+
+  def sort!
+    return if @size <= 1
+
+    until sorted?
+      0.upto(@size-2) do |i|
+        item = get(i, true)
+        item2 = get(i+1, true)
+
+        if(item <=> item2) == 1 #first item is greater
+          swap_with_next(i)
+        end
+      end
+    end
   end
 
   private
