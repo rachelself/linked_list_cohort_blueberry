@@ -103,18 +103,6 @@ class LinkedList
   def sorted?
     # call sort and then compare the sorted list to original list
     # if they match then return true.
-
-    # current_item = @first_item
-    # until current_item.nil?
-    #   index += 1
-    #   return true if current_item > current_item.next_item
-    #   # previous_item = get(index - 1, true)
-    #   # next_item = get(index + 1, true)
-    #   # previous_item.next_item = next_item
-    #
-    #   return true if
-    # end
-    # true
   end
 
   def sort
